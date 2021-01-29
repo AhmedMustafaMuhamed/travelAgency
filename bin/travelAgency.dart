@@ -1,12 +1,14 @@
 import 'TripModule.dart';
 import 'dart:io';
 
+import 'passengerModule.dart';
+
 void main(List<String> arguments) {
   bool flag = true;
-  String yes = 'n';
+
   int choose ;
   List<Trip> tripsList = List();
-
+  List<passenger> passengersList = List();
   while (flag == true) {
     stdout.write('\t\t-----------------------------------'
         '\n \t \t 1. add trip \t 2. edit trip \n '
@@ -19,21 +21,26 @@ void main(List<String> arguments) {
     choose= int.parse(stdin.readLineSync());
     if(choose == 1){
       // add trip
+      String input;
+      String yes = 'y';
       while(yes=='y'){
         Trip trip1= Trip() ;
         trip1.addTrip();
         tripsList.add(trip1);
         print('\t  Successfully added ^_^ ');
         print('are you want to add another trip?(y/n)');
-        if (stdin.readLineSync() == 'y'){
+        input=stdin.readLineSync();
+        if (input == 'y'){
           yes= 'y';
-        }else if(stdin.readLineSync() == 'n'){
+        }else if(input == 'n'){
           yes='n';
         }
       }
     }else if(choose == 2){
       int index;
       Trip trip2 ;
+      String yes = 'y';
+      String input;
       while(yes=='y'){
        stdout.write('=> enter trip id : ');
        int triplId= int.parse(stdin.readLineSync());
@@ -58,9 +65,10 @@ void main(List<String> arguments) {
          print('\t  Successfully etided ^_^ ');
        }
        print('are you want to edit another trip?(y/n)');
-       if (stdin.readLineSync() == 'y'){
+       input=stdin.readLineSync();
+       if (input == 'y'){
          yes= 'y';
-       }else if(stdin.readLineSync() == 'n'){
+       }else if(input == 'n'){
          yes='n';
        }
       }
@@ -69,33 +77,38 @@ void main(List<String> arguments) {
       int index;
       int tripid;
       Trip trip3;
-      print('=>enter trip id : ');
-      tripid= int.parse(stdin.readLineSync());
-      if(tripsList.isNotEmpty){
-        for(int i=0;i<tripsList.length-1;i++){
-          if(tripsList[i].id==tripid) {
-            index = i;
-            trip3=tripsList[i];
-            break;
+      String yes = 'y';
+      String input;
+      while(yes=='y'){
+        print('=>enter trip id : ');
+        tripid= int.parse(stdin.readLineSync());
+        if(tripsList.isNotEmpty){
+          for(int i=0;i<tripsList.length-1;i++){
+            if(tripsList[i].id==tripid) {
+              index = i;
+              trip3=tripsList[i];
+              break;
+            }
           }
+          if(trip3==null){
+            print("there is'nt a trip with this Id please try again...");
+          }
+        }else {
+          print("there is no trips added yet ");
+          continue;
         }
-        if(trip3==null){
-          print("there is'nt a trip with this Id please try again...");
+        if(trip3!=null){
+          print(trip3.toString());
+          tripsList.removeAt(index);
+          print('\t  Successfully deleted ^_^ ');
         }
-      }else {
-        print("there is no trips added yet ");
-        continue;
-      }
-      if(trip3!=null){
-        print(trip3.toString());
-        tripsList.removeAt(index);
-        print('\t  Successfully deleted ^_^ ');
-      }
-      print('are you want to edit another trip?(y/n)');
-      if (stdin.readLineSync() == 'y'){
-        yes= 'y';
-      }else if(stdin.readLineSync() == 'n'){
-        yes='n';
+        print('are you want to add another trip?(y/n)');
+        input=stdin.readLineSync();
+        if (input == 'y'){
+          yes= 'y';
+        }else if(input == 'n'){
+          yes='n';
+        }
       }
 
     }else if(choose == 4){
@@ -103,12 +116,14 @@ void main(List<String> arguments) {
       int index ;
       double triplprice ;
       Trip trip4 ;
+      String yes = 'y';
+      String input;
       while(yes=='y') {
         stdout.write('=> enter trip price : ');
         triplprice = double.parse(stdin.readLineSync());
         if (tripsList.isNotEmpty) {
           for (int i = 0; i < tripsList.length - 1; i++) {
-            if (tripsList[i].id == triplprice) {
+            if (tripsList[i].price == triplprice) {
               index = i;
               trip4 = tripsList[i];
               break;
@@ -125,9 +140,10 @@ void main(List<String> arguments) {
           print(trip4.toString());
         }
         print('are you want to edit another trip?(y/n)');
-        if (stdin.readLineSync() == 'y') {
+        input=stdin.readLineSync();
+        if (input == 'y') {
           yes = 'y';
-        } else if (stdin.readLineSync() == 'n') {
+        } else if (input == 'n') {
           yes = 'n';
         }
       }
@@ -139,34 +155,126 @@ void main(List<String> arguments) {
       print('this all trips');
 
     }else if(choose == 6){
-      for (int i = 0; i < tripsList.length - 1; i++) {
-        print(tripsList[i].toString());
+      if (tripsList.length-1<= 10){
+        for (int i = 0; i < tripsList.length - 1; i++) {
+          print(tripsList[i].toString());
+        }
+      }
+      else {
+        for (int i = 1; i <= 10; i++) {
+          print(tripsList[tripsList.length-i].toString());
+        }
       }
       print('this last 10 trips');
     }else if(choose == 7){
-      print('sorry cant complete time is ending ');
-      print('are you want to edit another trip?(y/n)');
-      if (stdin.readLineSync() == 'y'){
-        yes= 'y';
-      }else if(stdin.readLineSync() == 'n'){
-        yes='n';
+      int index;
+      int tripid;
+      Trip trip3;
+      passenger passenger1;
+      String yes = 'y';
+      String input;
+      while(yes=='y'){
+        print('=>enter trip id : ');
+        tripid= int.parse(stdin.readLineSync());
+
+        if(tripsList.isNotEmpty){
+          for(int i=0;i<tripsList.length-1;i++){
+            if(tripsList[i].id==tripid) {
+              index = i;
+              trip3=tripsList[i];
+              break;
+            }
+          }
+          if(trip3==null){
+            print("there is'nt a trip with this Id please try again...");
+          }
+        }else {
+          print("there is no trips added yet ");
+          continue;
+        }
+        if(trip3!=null){
+          print(trip3.toString());
+          if(trip3.count_passener==trip3.passener_Limite){
+            print('sorry this trip is full complete try another trip');
+          }
+          else {
+            passenger1 = passenger();
+            passenger1.reservepassenger();
+            passengersList.add(passenger1);
+          }
+          print('\t  Successfully reserved ^_^ ');
+        }
+        print('are you want to edit another trip?(y/n)');
+        input=stdin.readLineSync();
+        if (input == 'y'){
+          yes= 'y';
+        }else if(input == 'n'){
+          yes='n';
+        }
       }
+
     }else if(choose == 8){
-      print('sorry cant complete time is ending ');
-      print('are you want to edit another trip?(y/n)');
-      if (stdin.readLineSync() == 'y'){
-        yes= 'y';
-      }else if(stdin.readLineSync() == 'n'){
-        yes='n';
+      int tripindex;
+      int passengerindex;
+      Trip trip2 ;
+      passenger passenger1;
+      String yes = 'y';
+      String input;
+      while(yes=='y'){
+        stdout.write('=> enter trip id : ');
+        int triplId= int.parse(stdin.readLineSync());
+        if(tripsList.isNotEmpty){
+          for(int i=0;i<tripsList.length-1;i++){
+            if(tripsList[i].id==triplId) {
+              tripindex = i;
+              trip2=tripsList[i];
+              break;
+            }
+          }
+          if(trip2==null){
+            print("there is'nt a trip with this Id please try again...");
+          }
+        }else {
+          print("there is no trips added yet ");
+          continue;
+        }
+        if(trip2!=null){
+          print(trip2.toString());
+          if(passengersList.isNotEmpty){
+            for(int i=0;i<passengersList.length-1;i++){
+              if(passengersList[i].passenger_tripid==triplId) {
+                passengerindex = i;
+                passenger1=passengersList[i];
+                break;
+              }
+            }
+            if(passenger1==null){
+              print("there is'nt a passenger with this tripId please try again...");
+            }
+          }else {
+            print("there is no passengers added yet ");
+            continue;
+          }
+          if(passenger1!=null) {
+            print(passenger1.toString());
+            passengersList[passengerindex] = passenger1.editpassenger();
+            print('\t  Successfully etided ^_^ ');
+          }
+        }
+        print('are you want to edit another trip?(y/n)');
+        input=stdin.readLineSync();
+        if (input == 'y'){
+          yes= 'y';
+        }else if(input == 'n'){
+          yes='n';
+        }
       }
     }else if(choose == 9){
-      print('sorry cant complete time is ending ');
-      print('are you want to edit another trip?(y/n)');
-      if (stdin.readLineSync() == 'y'){
-        yes= 'y';
-      }else if(stdin.readLineSync() == 'n'){
-        yes='n';
+
+      for (int i = 0; i < passengersList.length - 1; i++) {
+        print(passengersList[i].toString());
       }
+      print('this all passengers');
     }else if(choose == 10){
       // exit
       flag = false;
