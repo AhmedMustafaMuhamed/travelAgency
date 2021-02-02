@@ -14,7 +14,7 @@ void main(List<String> arguments) {
         '\n \t \t 1. add trip \t 2. edit trip \n '
         '\n \t \t 3. del trip \t 4. search by price \n '
         '\n \t \t 5. view trips \t 6. view last trips \n '
-        '\n \t \t 7. reserve \t 8. add passenger \n '
+        '\n \t \t 7. reserve \t 8. edit passenger \n '
         '\n \t     9. view passenger 10. exit \n '
         '\t\t-----------------------------------\n ');
     stdout.write('choose an option : ');
@@ -22,8 +22,8 @@ void main(List<String> arguments) {
     if(choose == 1){
       // add trip
       String input;
-      String yes = 'y';
-      while(yes=='y'){
+      String yes = 'y' ;
+      while(yes=='y' && yes!= Null){
         Trip trip1= Trip() ;
         trip1.addTrip();
         tripsList.add(trip1);
@@ -98,7 +98,7 @@ void main(List<String> arguments) {
           continue;
         }
         if(trip3!=null){
-          print(trip3.toString());
+          stdout.write(trip3.toString()) ;
           tripsList.removeAt(index);
           print('\t  Successfully deleted ^_^ ');
         }
@@ -126,7 +126,9 @@ void main(List<String> arguments) {
             if (tripsList[i].price == triplprice) {
               index = i;
               trip4 = tripsList[i];
-              break;
+              if (trip4 != null) {
+                print(trip4.toString());
+              }
             }
           }
           if (trip4 == null) {
@@ -136,9 +138,9 @@ void main(List<String> arguments) {
           print("there is no trips added yet ");
           continue;
         }
-        if (trip4 != null) {
+        /*if (trip4 != null) {
           print(trip4.toString());
-        }
+        }*/
         print('are you want to edit another trip?(y/n)');
         input=stdin.readLineSync();
         if (input == 'y') {
@@ -193,14 +195,16 @@ void main(List<String> arguments) {
           continue;
         }
         if(trip3!=null){
-          print(trip3.toString());
+          stdout.write(trip3.toString() + '\n');
           if(trip3.count_passener==trip3.passener_Limite){
             print('sorry this trip is full complete try another trip');
           }
           else {
+            trip3.count_passener++;
             passenger1 = passenger();
             passenger1.reservepassenger();
             passengersList.add(passenger1);
+
           }
           print('\t  Successfully reserved ^_^ ');
         }
@@ -239,7 +243,7 @@ void main(List<String> arguments) {
           continue;
         }
         if(trip2!=null){
-          print(trip2.toString());
+//          print(trip2.toString());
           if(passengersList.isNotEmpty){
             for(int i=0;i<passengersList.length;i++){
               if(passengersList[i].passenger_tripid==triplId) {
@@ -261,7 +265,7 @@ void main(List<String> arguments) {
             print('\t  Successfully etided ^_^ ');
           }
         }
-        print('are you want to edit another trip?(y/n)');
+        print('are you want to edit another passenger?(y/n)');
         input=stdin.readLineSync();
         if (input == 'y'){
           yes= 'y';
@@ -282,3 +286,5 @@ void main(List<String> arguments) {
 
   }
 }
+
+// 1 12 12 12 12 12 12 12

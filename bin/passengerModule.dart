@@ -7,7 +7,7 @@ class passenger{
   int passenger_tripid;
 
   reservepassenger(){
-    stdout.write('=> enter Id: ');
+    stdout.write('=> enter passenger Id: ');
     passengerId = int.parse(stdin.readLineSync());
 
     stdout.write('=> enter name: ');
@@ -18,10 +18,15 @@ class passenger{
 
   }
   passenger editpassenger(){
-    stdout.write('=> enter Id: ');
+    stdout.write('=> enter passenger Id: ');
     passengerId = int.parse(stdin.readLineSync());
 
     stdout.write('=> enter name: ');
     passengername = stdin.readLineSync();
+  }
+
+  @override
+  String toString() {
+    return 'passenger_id : $passengerId \t passenger_name : $passengername \t passenger_tripid : $passenger_tripid ';
   }
 }
