@@ -45,7 +45,7 @@ void main(List<String> arguments) {
        stdout.write('=> enter trip id : ');
        int triplId= int.parse(stdin.readLineSync());
        if(tripsList.isNotEmpty){
-         for(int i=0;i<tripsList.length-1;i++){
+         for(int i=0;i<tripsList.length;i++){
             if(tripsList[i].id==triplId) {
               index = i;
               trip2=tripsList[i];
@@ -83,7 +83,7 @@ void main(List<String> arguments) {
         print('=>enter trip id : ');
         tripid= int.parse(stdin.readLineSync());
         if(tripsList.isNotEmpty){
-          for(int i=0;i<tripsList.length-1;i++){
+          for(int i=0;i<tripsList.length;i++){
             if(tripsList[i].id==tripid) {
               index = i;
               trip3=tripsList[i];
@@ -149,14 +149,14 @@ void main(List<String> arguments) {
       }
     }else if(choose == 5){
       // view trips
-      for (int i = 0; i < tripsList.length - 1; i++) {
+      for (int i = 0; i < tripsList.length; i++) {
         print(tripsList[i].toString());
       }
       print('this all trips');
 
     }else if(choose == 6){
-      if (tripsList.length-1<= 10){
-        for (int i = 0; i < tripsList.length - 1; i++) {
+      if (tripsList.length<= 10){
+        for (int i = 0; i < tripsList.length; i++) {
           print(tripsList[i].toString());
         }
       }
@@ -178,7 +178,7 @@ void main(List<String> arguments) {
         tripid= int.parse(stdin.readLineSync());
 
         if(tripsList.isNotEmpty){
-          for(int i=0;i<tripsList.length-1;i++){
+          for(int i=0;i<tripsList.length;i++){
             if(tripsList[i].id==tripid) {
               index = i;
               trip3=tripsList[i];
@@ -224,7 +224,7 @@ void main(List<String> arguments) {
         stdout.write('=> enter trip id : ');
         int triplId= int.parse(stdin.readLineSync());
         if(tripsList.isNotEmpty){
-          for(int i=0;i<tripsList.length-1;i++){
+          for(int i=0;i<tripsList.length;i++){
             if(tripsList[i].id==triplId) {
               tripindex = i;
               trip2=tripsList[i];
@@ -241,7 +241,7 @@ void main(List<String> arguments) {
         if(trip2!=null){
           print(trip2.toString());
           if(passengersList.isNotEmpty){
-            for(int i=0;i<passengersList.length-1;i++){
+            for(int i=0;i<passengersList.length;i++){
               if(passengersList[i].passenger_tripid==triplId) {
                 passengerindex = i;
                 passenger1=passengersList[i];
@@ -271,7 +271,7 @@ void main(List<String> arguments) {
       }
     }else if(choose == 9){
 
-      for (int i = 0; i < passengersList.length - 1; i++) {
+      for (int i = 0; i < passengersList.length; i++) {
         print(passengersList[i].toString());
       }
       print('this all passengers');
